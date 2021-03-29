@@ -10,4 +10,4 @@ Thank you for playing!!
 
 
 # License
-Read the <a href="https://github.com/Siki1999/ZombieStrike_Code/blob/main/LICENSE.md">license</a>.
+Read the <a href="https://github.com/Siki1999/ZombieStrike_Code/blob/main/LICENSE">license</a>.
