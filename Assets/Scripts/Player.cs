@@ -70,7 +70,10 @@ public class Player : MonoBehaviour
     {
         youLose.SetActive(true);
         youLoseBackground.gameObject.SetActive(true);
-        a.PlayOneShot(YouDied, 0.5f);
+        if (!a.isPlaying)
+        {
+            a.PlayOneShot(YouDied, 0.5f);
+        }
     }
 
     private void ChangeScene()
