@@ -8,7 +8,7 @@ To download simply clone repository.
 
 After download open Unity Hub and click on Add, go to just downloaded folder and click ok.
 
-When project opens go to Assets/Scenes and drag and drop all 3 scenes in Hierarchy window.
+When project opens go to Assets/Scenes and drag and drop all 3 scenes to Hierarchy window.
 
 If you don't know how to clone repository here is a quick tutorial.
 
