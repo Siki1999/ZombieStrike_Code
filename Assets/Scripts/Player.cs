@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private float health = 100;
     private int money = 0;
+    private float passiveMoney;
+    private float MoneyPer30Seconds;
+    private float Countdown = 120;
+    private string CountdownText;
     private float next = 4;
     private CamShake cams;
     public Text HealthText;
@@ -21,10 +24,20 @@ public class Player : MonoBehaviour
     public Image bloodImage;
     public GameObject youLose;
     public Image youLoseBackground;
+    public static float multy;
+    private float MaxHealth;
+    private float currentHealth;
+    public WaveSystem wave;
+    private bool done;
 
     private void Start()
     {
-        cams = GetComponentInChildren<CamShake>();   
+        cams = GetComponentInChildren<CamShake>();
+        passiveMoney = 1000 * multy;
+        MoneyPer30Seconds = passiveMoney / 4;
+        MaxHealth = 100 * multy;
+        currentHealth = MaxHealth;
+        HealthText.text = "Health: " + ((currentHealth/MaxHealth) * 100).ToString() + "%";
     }
 
     private void Update()
@@ -38,11 +51,49 @@ public class Player : MonoBehaviour
                 bloodImage.color = Color.Lerp(bloodImage.color, Transparent, 20 * Time.deltaTime);
             }
         }
+        if (wave.startCountdown)
+        {
+            if (!(Countdown < 0))
+            {
+                Countdown -= Time.deltaTime;
+                CountdownText = Countdown.ToString("F0");
+                if (CountdownText.Equals("90") || CountdownText.Equals("60") || CountdownText.Equals("30") || CountdownText.Equals("0"))
+                {
+                    if (!done)
+                    {
+                        AddMoney((int)MoneyPer30Seconds);
+                        passiveMoney -= MoneyPer30Seconds;
+                        done = true;
+                        Invoke("NotDone", 1);
+                    }
+                }
+            }
+            else
+            {
+                wave.startCountdown = false;
+            }
+        }
+        if (wave.EndWave)
+        {
+            wave.startCountdown = false;
+            wave.EndWave = false;
+            done = true;
+            AddMoney((int)passiveMoney);
+            passiveMoney = MoneyPer30Seconds * 4;
+            Countdown = 120;
+            Invoke("NotDone", 1);
+        }
+
+    }
+
+    private void NotDone()
+    {
+        done = false;
     }
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        currentHealth -= damage;
         if(dead == false)
         {
             new WaitForSeconds(0.5f);
@@ -52,11 +103,11 @@ public class Player : MonoBehaviour
             bloodImage.color = Color.Lerp(bloodImage.color, Opaque, 100 * Time.deltaTime);
         }
 
-        HealthText.text = "Health: " + health.ToString() + "%";
+        HealthText.text = "Health: " + ((currentHealth / MaxHealth) * 100).ToString() + "%";
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
-            health = 20;
+            currentHealth = 20;
             dead = true;
             fps.enabled = false;
             Quaternion newRotation = Quaternion.AngleAxis(45, Vector3.back);
@@ -112,11 +163,11 @@ public class Player : MonoBehaviour
 
     public void AddHealth(int amount)
     {
-        health += amount;
-        if(health > 100)
+        currentHealth += amount * multy;
+        if(currentHealth > MaxHealth)
         {
-            health = 100;
+            currentHealth = MaxHealth;
         }
-        HealthText.text = "Health: " + health.ToString() + "%";
+        HealthText.text = "Health: " + ((currentHealth / MaxHealth) * 100).ToString() + "%";
     }
 }

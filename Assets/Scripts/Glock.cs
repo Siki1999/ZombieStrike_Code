@@ -138,6 +138,13 @@ public class Glock : MonoBehaviour
                 impact = Instantiate(FloorHit, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(impact, 0.5f);
             }
+            if (hit.transform.tag == "EasterEgg")
+            {
+                impact = Instantiate(ZombieHit, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 0.5f);
+                Destroy(hit.transform.gameObject);
+                PlayerManager.instance.player.GetComponent<Player>().AddMoney(500);
+            }
         }
     }
 

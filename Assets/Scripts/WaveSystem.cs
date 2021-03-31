@@ -34,6 +34,8 @@ public class WaveSystem : MonoBehaviour
     public float waveCountdown;
     private float searchCountdown = 1;
     public spawnState state = spawnState.COUNTING;
+    public bool startCountdown;
+    public bool EndWave;
 
     private void Start()
     {
@@ -113,6 +115,7 @@ public class WaveSystem : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave)
     {
+        startCountdown = true;
         state = spawnState.SPAWNING;
         textWaveName.text = _wave.name;
 
@@ -161,6 +164,7 @@ public class WaveSystem : MonoBehaviour
         {
             nextWave++;
             textCountdown.enabled = true;
+            Invoke("EndWavePassiveMoney", 1);
             if (waves.Length == 3)
             {
                 PlayerManager.instance.player.GetComponent<Player>().AddMoney(2500);
@@ -182,6 +186,11 @@ public class WaveSystem : MonoBehaviour
                 ai.GetComponent<EnemyAI>().health += 20;
             }
         }
+    }
+
+    void EndWavePassiveMoney()
+    {
+        EndWave = true;
     }
 
     void HideTip()

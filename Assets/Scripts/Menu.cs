@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject DifficultyMenu;
+    public GameObject WaveMenu;
+
     public void Quit()
     {
         Application.Quit();
@@ -38,5 +41,26 @@ public class Menu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void EasyGoToWaves()
+    {
+        Player.multy = 2;
+        DifficultyMenu.SetActive(false);
+        WaveMenu.SetActive(true);
+    }
+
+    public void MediumGoToWaves()
+    {
+        Player.multy = 1.5f;
+        DifficultyMenu.SetActive(false);
+        WaveMenu.SetActive(true);
+    }
+
+    public void HardGoToWaves()
+    {
+        Player.multy = 1;
+        DifficultyMenu.SetActive(false);
+        WaveMenu.SetActive(true);
     }
 }

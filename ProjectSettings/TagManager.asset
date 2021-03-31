@@ -8,6 +8,7 @@ TagManager:
   - EnemyHead
   - Forrest
   - Terrain
+  - EasterEgg
   layers:
   - Default
   - TransparentFX

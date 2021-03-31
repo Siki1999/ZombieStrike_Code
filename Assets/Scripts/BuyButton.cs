@@ -51,6 +51,43 @@ public class BuyButton : MonoBehaviour
         }
     }
 
+    public void BuyAmmo2()
+    {
+        if (PlayerManager.instance.player.GetComponent<Player>().GetMoney() >= int.Parse(Cost.text.Substring(0, Cost.text.Length - 1)))
+        {
+            if (list.guns.Count > 1)
+            {
+                foreach (GameObject gun in list.guns)
+                {
+                    if (gun.activeSelf == true && list.guns[0].activeSelf == false)
+                    {
+                        string name = gun.name;
+                        switch (name)
+                        {
+                            case "AK":
+                                gun.GetComponent<Ak47>().AddAmmo();
+                                gun.GetComponent<Ak47>().AddAmmo();
+                                break;
+                            case "M4":
+                                gun.GetComponent<M4>().AddAmmo();
+                                gun.GetComponent<M4>().AddAmmo();
+                                break;
+                            case "Shotgun":
+                                gun.GetComponent<Shotgun>().AddAmmo();
+                                gun.GetComponent<Shotgun>().AddAmmo();
+                                break;
+                            case "Awp":
+                                gun.GetComponent<Awp>().AddAmmo();
+                                gun.GetComponent<Awp>().AddAmmo();
+                                break;
+                        }
+                        PlayerManager.instance.player.GetComponent<Player>().RemoveMoney(int.Parse(Cost.text.Substring(0, Cost.text.Length - 1)));
+                    }
+                }
+            }
+        }
+    }
+
     public void BuyWeapon(GameObject Gun)
     {
         if (PlayerManager.instance.player.GetComponent<Player>().GetMoney() >= int.Parse(Cost.text.Substring(0, Cost.text.Length - 1)))
