@@ -14,6 +14,10 @@ Delete untitled scene, select "GameScene" click on three dots on the right and u
 
 If you don't know how to clone repository here is a quick tutorial.
 
+# Needed tools:
+- Unity (Download Unity [here](https://unity3d.com/get-unity/download))
+- Visual Studio (Download Visual Studio [here](https://visualstudio.microsoft.com/downloads/))
+
 # Tutorial
 - Download and install git [here](https://git-scm.com/downloads)
 - Right mouse click on desktop and click ***Git Bash Here***
