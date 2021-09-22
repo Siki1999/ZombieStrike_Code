@@ -22,6 +22,7 @@ If you don't know how to clone repository here is a quick tutorial.
 - Download and install git [here](https://git-scm.com/downloads)
 - Right mouse click on desktop and click ***Git Bash Here***
 - Copy and paste (Middle mouse click) this code: ***git clone ht<span>tps:</span>//github.com/Siki1999/ZombieStrike_Code.git***
+- Open cloned folder in Unity hub
 - ***DONE***
 
 # License
